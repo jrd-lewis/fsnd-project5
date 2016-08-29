@@ -1,0 +1,1 @@
+WORDS = ['Python', 'HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL']
