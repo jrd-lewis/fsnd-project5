@@ -17,8 +17,6 @@ Description here...
 ##Endpoints Included:
  - **create_user**
  - **new_game**
- - **guess_letter**
- - **guess_word**
 
 
 ##Models Included:
