@@ -16,18 +16,78 @@ Description here...
 
 ##Endpoints Included:
  - **cancel_game**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
  - **create_user**
+   - Path: 'user'
+   - Method: POST
+   - Parameters: user_name, email (optional)
+   - Returns: Message confirming creation of the User.
+   - Description: Creates a new User. user_name provided must be unique. Will 
+    raise a ConflictException if a User with that user_name already exists.
  - **get_scores**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
  - **get_user_games**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
  - **get_user_scores**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
  - **guess_letter**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
  - **guess_word**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
  - **new_game**
+   - Path: ''
+   - Method: 
+   - Parameters: 
+   - Returns: 
+   - Description: 
 
 
 ##Models Included:
- - **User**
- - **Game**
- - **Score**
+  - **User**
+    - Stores unique user_name and (optional) email address.
+    
+  - **Game**
+    - Stores unique game states. Associated with User model via KeyProperty.
+    
+  - **Score**
+    - Records completed games. Associated with Users model via KeyProperty.
 
 ##Forms Included:
+ - **GameForm**
+    - Representation of a Game's state (urlsafe_key, attempts_remaining,
+    game_over flag, message, user_name).
+ - **NewGameForm**
+    - Used to create a new game (user_name, min, max, attempts)
+ - **MakeMoveForm**
+    - Inbound make move form (guess).
+ - **ScoreForm**
+    - Representation of a completed game's Score (user_name, date, won flag,
+    guesses).
+ - **ScoreForms**
+    - Multiple ScoreForm container.
+ - **StringMessage**
+    - General purpose String container.
