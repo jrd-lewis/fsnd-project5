@@ -31,6 +31,7 @@ class Game(ndb.Model):
     	game = Game(user=user,
                     target_word=word_to_guess,
                     current_word=current_word,
+                    guess_history='',
                     attempts_allowed=attempts,
                     attempts_remaining=attempts,
                     game_over=False)
@@ -51,6 +52,8 @@ class Game(ndb.Model):
         """Ends the game - if won is True, the player won. - if won is False,
         the player lost."""
         self.game_over = True
+        if won == True:
+            self.current_word = self.target_word
         self.put()
         # Add the game to the score 'board'
         score = Score(user=self.user, date=date.today(), won=won,
@@ -98,6 +101,10 @@ class ScoreForms(messages.Message):
     """Return multiple ScoreForms"""
     items = messages.MessageField(ScoreForm, 1, repeated=True)
 
+
+class GameForms(messages.Message):
+    """Return multiple GameForms"""
+    items = messages.MessageField(GameForm, 1, repeated=True)
 
 class StringMessage(messages.Message):
     """StringMessage-- outbound (single) string message"""
