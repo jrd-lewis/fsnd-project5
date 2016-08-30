@@ -1,1 +1,2 @@
+MEMCACHE_MOVES_REMAINING = 'MOVES_REMAINING'
 WORDS = ['Python', 'HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL']
