@@ -15,7 +15,13 @@ Description here...
  - utils.py: Helper function for retrieving ndb.Models by urlsafe Key string.
 
 ##Endpoints Included:
+ - **cancel_game**
  - **create_user**
+ - **get_scores**
+ - **get_user_games**
+ - **get_user_scores**
+ - **guess_letter**
+ - **guess_word**
  - **new_game**
 
 
