@@ -1,0 +1,31 @@
+What additional properties did you add to your models and why?
+Game model
+* WORDS: It allowed me to define an array of words to randomly choose for the target word
+* current_word: Allowed me to return the current state of the word with,
+				filling in for the blank spots that haven't been guessed
+				yet.
+User model
+* games_won: Ease of returning the user's wins for the RankForm
+* games_loss: Ease of returning the user's wins for the RankForm
+* win_loss: Ease of returning the user's win-loss as a float for the RankForm
+HistoryForm:
+* Guess: Allowed me to return each guess that the user made
+* Result: Allowed me to return the result of each guess
+HistoryForms:
+* history: Allowed me to iterate multiple HistoryForm instances
+RankForm:
+* user_name: Allowed me to return the user's name
+* games_won: Allowed me to return the user's total wins
+* games_lost: Allowed me to return the user's total losses
+* win_loss: Allowed me to return the win-loss ratio as a decimal,
+which in turn makes it easier to convert into a percentage.
+RankForms:
+* items: Allowed me to iterate multiple RankForm instances
+
+What were some of the trade-offs or struggles you faced when implementing the new game logic?
+* Figuring out the best way to do rankings was a struggle since I am used to SQL logic of joining tables.
+Instead, I added the 3 mentioned properties to the User model for ease of returning the wins and losses.
+* I traded off the idea of only being letter based for the make_guess method, so that if the
+user knew the word, they could guess it. (Similar to how it's done with the Wheel of Fortune tv game show.)
+* I also traded off having all the models in one file to have them separated so it would be easier to change
+without messing up anything else up in the process.

@@ -10,7 +10,8 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-- kind: Game
+- kind: Score
   properties:
-  - name: game_over
-  - name: user
+  - name: won
+  - name: guesses
+    direction: desc
