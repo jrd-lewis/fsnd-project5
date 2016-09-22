@@ -30,7 +30,10 @@ endpoint. Note: This will count against your score.
     - If a User guesses the correct word.
     - If a User guesses the word letter by letter within the defined 'attempts'.
  - **High Scores**
-    - Orders the Scores by the number of guesses, which is determined by substracting 'attempts_remaining' from 'attempts_allowed'.
+    - Scores are ordered by the number of guesses, which is determined by substracting 'attempts_remaining' from 'attempts_allowed'.
+ - **Ranks**
+    - Ranks are determined by the 'win_loss', which is stored as a float, of each User in descending order. (e.g. Highest 'win_loss' to lowest 'win_loss'.)
+
 
 ##Game Description:
 This is a classic version of the Hangman game. A word is randomly selected from
