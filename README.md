@@ -50,7 +50,7 @@ interacted with by using its `urlsafe_game_key`.
  - app.yaml: App configuration.
  - cron.yaml: Cronjob configuration.
  - main.py: Handler for taskqueue handler.
- - models (__init__.py, game.py, message.py, score.py, user.py): Entity and message definitions including helper methods.
+ - models (`__init__.py`, game.py, message.py, score.py, user.py): Entity and message definitions including helper methods.
  - utils.py: Helper function for retrieving ndb.Models by urlsafe Key string.
 
 ##Endpoints Included:
