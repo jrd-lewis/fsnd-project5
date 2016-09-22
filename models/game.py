@@ -11,6 +11,7 @@ from score import Score
 
 WORDS = ['Python', 'HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL']
 
+
 class Game(ndb.Model):
     """Game object"""
     target_word = ndb.StringProperty(required=True)
@@ -23,10 +24,10 @@ class Game(ndb.Model):
 
     @classmethod
     def new_game(cls, user, attempts):
-    	"""Creates and returns a new game"""
-    	word_to_guess = random.choice(WORDS)
+        """Creates and returns a new game"""
+        word_to_guess = random.choice(WORDS)
         current_word = '-' * len(word_to_guess)
-    	game = Game(user=user,
+        game = Game(user=user,
                     target_word=word_to_guess,
                     current_word=current_word,
                     guess_history='',
@@ -52,7 +53,7 @@ class Game(ndb.Model):
         the player lost."""
         user = self.user.get()
         self.game_over = True
-        if won == True:
+        if won:
             user.games_won += 1
             self.current_word = self.target_word
         else:
@@ -71,15 +72,18 @@ class Game(ndb.Model):
                       guesses=self.attempts_allowed - self.attempts_remaining)
         score.put()
 
+
 class NewGameForm(messages.Message):
     """Used to create a new game"""
     user_name = messages.StringField(1, required=True)
-    attempts = messages.IntegerField(2, default=6)
+    attempts = messages.IntegerField(2)
+
 
 class MakeMoveForm(messages.Message):
     """Used to guess a letter or word in an existing game"""
     guess = messages.StringField(1, required=True)
-    word_guess =  messages.BooleanField(2, required=True)
+    word_guess = messages.BooleanField(2, required=True)
+
 
 class GameForm(messages.Message):
     """GameForm for outbound game state information"""
@@ -90,14 +94,17 @@ class GameForm(messages.Message):
     message = messages.StringField(6, required=True)
     user_name = messages.StringField(7, required=True)
 
+
 class GameForms(messages.Message):
     """Return multiple GameForms"""
     items = messages.MessageField(GameForm, 1, repeated=True)
+
 
 class HistoryForm(messages.Message):
     """HistoryForm-- outbound (single) string message"""
     Guess = messages.StringField(1, required=True)
     Result = messages.StringField(2, required=True)
+
 
 class HistoryForms(messages.Message):
     """Returns multiple GuessMessage"""

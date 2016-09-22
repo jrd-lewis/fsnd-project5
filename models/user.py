@@ -2,11 +2,9 @@
 entities used by the User. Because this class is also a regular Python
 classes it can include methods (such as 'to_form' and 'new_game')."""
 
-import random
-from datetime import date
-from fractions import Fraction
 from protorpc import messages
 from google.appengine.ext import ndb
+
 
 class User(ndb.Model):
     """User profile"""
@@ -17,7 +15,6 @@ class User(ndb.Model):
     win_loss = ndb.FloatProperty(required=True, default=0.0)
 
     def to_rank_form(self):
-    	total_games = self.games_won + self.games_lost
         form = RankForm()
         form.user_name = self.name
         form.games_won = self.games_won
@@ -25,12 +22,14 @@ class User(ndb.Model):
         form.win_loss = self.win_loss
         return form
 
+
 class RankForm(messages.Message):
     """RankForm for outbound User information"""
     user_name = messages.StringField(1, required=True)
-    games_won =  messages.IntegerField(2, required=True)
-    games_lost =  messages.IntegerField(3, required=True)
+    games_won = messages.IntegerField(2, required=True)
+    games_lost = messages.IntegerField(3, required=True)
     win_loss = messages.FloatField(4, required=True)
+
 
 class RankForms(messages.Message):
     """Return multiple RankForms"""

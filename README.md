@@ -10,15 +10,38 @@
 4.  Visit the API Explorer - by default localhost:8080/_ah/api/explorer. (Or the port specified
 when you add the application.)
 5.  (Optional) Deploy the application
- 
+
+## To Play a Game:
+1.  Create a new user, using the `create_user` endpoint.
+2.  Use `create_game` to create the game. Remember to copy the 'urlsafe_key' for
+later use.
+3.  To make a guess, use the `make_move` endpoint. Set 'guess' to your guess. If
+you're guessing the word, set 'word_guess' to 'True'.
+4.  If you want to end the game in its current state, use the `cancel_game`
+endpoint. Note: This will count against your score.
+
+##Score Keeping:
+ - **Score Definition**
+    - Scores are determined by a User's total number of wins divided by their total number of Games.
+ - **Losses**
+    - If a User can't guess the word within the defined 'attempts'.
+    - If a User cancels a Game.
+ - **Wins**
+    - If a User guesses the correct word.
+    - If a User guesses the word letter by letter within the defined 'attempts'.
+ - **High Scores**
+    - Orders the Scores by the number of guesses, which is determined by substracting 'attempts_remaining' from 'attempts_allowed'.
+
 ##Game Description:
 This is a classic version of the Hangman game. A word is randomly selected from
 a list of words for the player to guess. The player must guess the letters in the
-word or the word itself within the specified amount of guesses to win. Guesses are
-sent via the `make_move` function which will return: '{{number}} of {{letter}}'s
-Found!', 'You win!', 'Game over!' (if the maximum number of attempts is reached),
-'Letter already guessed!', 'Word already guessed!', 'Only a single letter may be
-guessed!' (if the user tries to guess multiple letters with word_guess set to false).
+word or the word itself within the specified amount of guesses to win. By default,
+the number of guesses is set to 6.
+Guesses are sent via the `make_move` function which will return: '{{number}} of
+{{letter}}'s Found!', 'You win!', 'Game over!' (if the maximum number of attempts
+is reached), 'Letter already guessed!', 'Word already guessed!', 'Only a single
+letter may be guessed!' (if the user tries to guess multiple letters with word_guess
+set to false).
 Multiple games can be played by different users at a given time. Each game can be
 interacted with by using its `urlsafe_game_key`.
 
@@ -59,10 +82,12 @@ interacted with by using its `urlsafe_game_key`.
  - **make_move**
     - Path: 'game/{urlsafe_game_key}'
     - Method: PUT
-    - Parameters: urlsafe_game_key, guess
+    - Parameters: urlsafe_game_key, guess, word_guess (optional)
     - Returns: GameForm with new game state.
     - Description: Accepts a 'guess' and returns the updated state of the game.
-    If this causes a game to end, a corresponding Score entity will be created.
+    The optional 'word_guess' will check if your guess is the word instead of
+    looking for individual letters in the word. If this causes a game to end,
+    a corresponding Score entity will be created.
     
  - **get_scores**
     - Path: 'scores'
